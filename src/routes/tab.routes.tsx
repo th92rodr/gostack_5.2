@@ -24,17 +24,17 @@ const TabRoutes: React.FC = () => (
   >
     <Tab.Screen
       options={{
-        tabBarIcon: ({ color }) => <Icon size={25} name="list" color={color} />,
+        tabBarIcon: ({ color }) => <Icon size={25} name='list' color={color} />,
         title: 'Listagem',
       }}
-      name="DashboardStack"
+      name='DashboardStack'
       component={Dashboard}
     />
     <Tab.Screen
-      name="Orders"
+      name='Orders'
       options={{
         tabBarIcon: ({ color }) => (
-          <Icon size={25} name="shopping-bag" color={color} />
+          <Icon size={25} name='shopping-bag' color={color} />
         ),
         title: 'Pedidos',
       }}
@@ -42,10 +42,10 @@ const TabRoutes: React.FC = () => (
     />
 
     <Tab.Screen
-      name="Favorites"
+      name='Favorites'
       options={{
         tabBarIcon: ({ color }) => (
-          <Icon size={25} name="heart" color={color} />
+          <Icon size={25} name='heart' color={color} />
         ),
         title: 'Favoritos',
       }}

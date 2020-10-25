@@ -13,17 +13,17 @@ const App = createStackNavigator();
 
 const AppRoutes: React.FC = () => (
   <NavigationContainer>
-    <App.Navigator initialRouteName="Home">
+    <App.Navigator initialRouteName='Home'>
       <App.Screen
         options={{
           cardStyle: { backgroundColor: '#C72828' },
           headerShown: false,
         }}
-        name="Home"
+        name='Home'
         component={Home}
       />
       <App.Screen
-        name="MainBottom"
+        name='MainBottom'
         component={TabRoutes}
         options={{
           headerShown: false,
@@ -31,21 +31,21 @@ const AppRoutes: React.FC = () => (
         }}
       />
       <App.Screen
-        name="FoodDetails"
+        name='FoodDetails'
         component={FoodDetails}
         options={({ navigation }) => ({
           headerLeft: () => (
             <Icon
-              name="arrow-left"
+              name='arrow-left'
               size={24}
-              color="#FFB84D"
+              color='#FFB84D'
               onPress={() => navigation.goBack()}
             />
           ),
           headerLeftContainerStyle: {
             marginLeft: 24,
           },
-          headerRight: () => <Icon name="heart" size={24} color="#FFB84D" />,
+          headerRight: () => <Icon name='heart' size={24} color='#FFB84D' />,
           headerRightContainerStyle: {
             marginRight: 24,
           },
