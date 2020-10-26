@@ -33,6 +33,8 @@ interface Food {
   name: string;
   description: string;
   price: number;
+  category: number;
+  image_url: string;
   thumbnail_url: string;
   formattedPrice: string;
 }
@@ -54,12 +56,37 @@ const Dashboard: React.FC = () => {
   const navigation = useNavigation();
 
   async function handleNavigate(id: number): Promise<void> {
-    // Navigate do ProductDetails page
+    navigation.navigate('FoodDetails', { id });
   }
 
   useEffect(() => {
     async function loadFoods(): Promise<void> {
-      // Load Foods from API
+      const response = await api.get<Food[]>('foods', {
+        params: {
+          name_like: searchValue,
+        },
+      });
+
+      let filteredFoods = response.data.map(food => {
+        return {
+          id: food.id,
+          name: food.name,
+          description: food.description,
+          price: food.price,
+          category: food.category,
+          image_url: food.image_url,
+          thumbnail_url: food.thumbnail_url,
+          formattedPrice: formatValue(food.price),
+        };
+      });
+
+      if (selectedCategory) {
+        filteredFoods = filteredFoods.filter(
+          food => food.category === selectedCategory,
+        );
+      }
+
+      setFoods(filteredFoods);
     }
 
     loadFoods();
@@ -67,14 +94,21 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     async function loadCategories(): Promise<void> {
-      // Load categories from API
+      const response = await api.get<Category[]>('categories');
+      setCategories(response.data);
     }
 
     loadCategories();
   }, []);
 
   function handleSelectCategory(id: number): void {
-    // Select / deselect category
+    setSelectedCategory(state => {
+      if (state === id) {
+        return undefined;
+      }
+
+      return id;
+    });
   }
 
   return (
@@ -82,9 +116,9 @@ const Dashboard: React.FC = () => {
       <Header>
         <Image source={Logo} />
         <Icon
-          name="log-out"
+          name='log-out'
           size={24}
-          color="#FFB84D"
+          color='#FFB84D'
           onPress={() => navigation.navigate('Home')}
         />
       </Header>
@@ -92,7 +126,7 @@ const Dashboard: React.FC = () => {
         <SearchInput
           value={searchValue}
           onChangeText={setSearchValue}
-          placeholder="Qual comida você procura?"
+          placeholder='Qual comida você procura?'
         />
       </FilterContainer>
       <ScrollView>
