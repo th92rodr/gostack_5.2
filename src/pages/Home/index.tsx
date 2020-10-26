@@ -41,7 +41,7 @@ const Home: React.FC = () => {
       <NavigationButton onPress={() => handleNavigate()}>
         <ButtonText>Entrar no Restaurant</ButtonText>
         <IconContainer>
-          <Icon name="log-in" size={24} color="#7A1818" />
+          <Icon name='log-in' size={24} color='#7A1818' />
         </IconContainer>
       </NavigationButton>
     </BackgroundImage>
